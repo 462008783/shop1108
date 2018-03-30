@@ -259,7 +259,11 @@ class GoodsController extends Controller
         return [
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
-            ]
+                'config' => [
+                    "imageUrlPrefix"  => "http://shop.com",//图片访问路径前缀
+
+                ],
+            ],
         ];
     }
 

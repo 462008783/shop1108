@@ -7,6 +7,8 @@ $params = array_merge(
 );
 
 return [
+    'defaultRoute'=>'index',
+    'layout'=>false,
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -16,9 +18,16 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => \frontend\models\User::className(),
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'on beforeLogin' => function($event) {
+                $user = $event->identity; //这里的就是User Model的实例
+                $user->login_time = time();
+                $user->login_ip = ip2long(Yii::$app->request->userIP);
+                $user->save();
+
+            },
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -36,14 +45,14 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
