@@ -76,7 +76,7 @@ class OrderController extends \yii\web\Controller
             $shopPrice = $value->shop_price*$cart[$value->id];
             $shopNum = $cart[$value->id];
         }
-        $shopPrice = number_format($shopPrice,2);
+//        $shopPrice = number_format($shopPrice,2);
         $request = \Yii::$app->request;
         if ($request->isPost) {
 
@@ -123,7 +123,7 @@ class OrderController extends \yii\web\Controller
             $order->pay_name = $pay->name;
 
             //总金额
-            $order->price =$shopPrice;
+            $order->price =$shopPrice + $order->delivery_price;
 
             //订单号
             $order->trade_no = date('ymdHis').rand(1000,9999);
@@ -191,6 +191,10 @@ class OrderController extends \yii\web\Controller
         };
     }
 
+    /**
+     * 订单完成
+     * @return string
+     */
     public function actionList()
     {
         return $this->render('list');
