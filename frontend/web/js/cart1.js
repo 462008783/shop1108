@@ -31,7 +31,6 @@ $(function(){
 			if (data.status){
 				//干掉tr
 				tr.remove();
-				alert(data.msg);
 			}
         });
     });

@@ -10,14 +10,16 @@ class AddressController extends \yii\web\Controller
     public function actionIndex()
     {
         //找到所有数据
-         $model = Address::find()->where(['user_id'=>\Yii::$app->user->identity->getId()])->all();
-
-
+         $model = Address::find()->where(['user_id'=>\Yii::$app->user->identity->getId()])->orderBy('status desc')->all();
 
         return $this->render('index',compact('model'));
     }
 
 
+    /**
+     * 收货地址添加
+     * @return string
+     */
     public function actionAdd()
     {
         //创建数据对象
@@ -69,7 +71,7 @@ class AddressController extends \yii\web\Controller
 
 
     /**
-     *
+     *收货地址删除
      * @param $id
      * @return string
      */
@@ -84,5 +86,7 @@ class AddressController extends \yii\web\Controller
         }
 
     }
+
+
 
 }

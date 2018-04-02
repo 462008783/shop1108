@@ -7,6 +7,7 @@
         <div class="topnav_right fr">
 <!--            ['??'[]'-->
             <ul>
+
                 <li>您好，欢迎<?=Yii::$app->user->identity->username??"";?>来到京西！<?php
                     $htmlGuest=<<<html
                         [<a href="/user/login/">登录</a>] [<a href="/user/reg/">免费注册</a>]
@@ -26,6 +27,9 @@ html;
 
 
                     ?></li>
+
+                <li class="line">|</li>
+                <li><a href="/index/index/">首页</a></li>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>

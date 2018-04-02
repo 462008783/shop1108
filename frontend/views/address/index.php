@@ -84,11 +84,11 @@ include Yii::getAlias('@app').'/views/common/header.php';
 
             ?>
             <dl>
-                <dt><?=$k+1;?>.<?=$value->name?>&ensp;<?=$value->province?>&ensp;<?=$value->city?>&ensp;<?=$value->area?>&ensp;<?=$value->address?>&ensp;<?=$value->mobile?> </dt>
+                <dt><?=$k+1;?>.<?=$value->name?>&ensp;<?=$value->province?>&ensp;<?=$value->city?>&ensp;<?=$value->county?>&ensp;<?=$value->address?>&ensp;<?=$value->mobile?> </dt>
                 <dd>
-                    <a href="">修改</a>
+
                     <a href="javascript:void(0)" class="del_btn" date-id="<?=$value->id?>">删除</a>
-                    <a href="">设为默认地址</a>
+                    <a href="javascript:;" class="default" date-id="<?=$value->id?>"><?=$value->status==1?"默认地址":"设为默认地址"?></a>
                 </dd>
             </dl>
             <?php
@@ -111,7 +111,7 @@ include Yii::getAlias('@app').'/views/common/header.php';
                         <label for=""><span>*</span>所在地区：</label>
                         <select name="Address[province]" id="province"></select>
                         <select name="Address[city]" id="city"></select>
-                        <select name="Address[area]" id="area"></select>
+                        <select name="Address[county]" id="area"></select>
                     </li>
                     <li>
                         <label for=""><span>*</span>详细地址：</label>
@@ -236,6 +236,7 @@ include Yii::getAlias('@app').'/views/common/header.php';
 
     $(function () {
 
+
         //提交数据
         $("#address_btn").click(function () {
             //ajax
@@ -253,8 +254,7 @@ include Yii::getAlias('@app').'/views/common/header.php';
                         });
                     });
                 }
-            },'json')
-
+            },'json');
         });
 
         //删除
@@ -270,13 +270,26 @@ include Yii::getAlias('@app').'/views/common/header.php';
                }
            });
         });
+
+        //默认
+        $(".default").click(function () {
+            var id=$(this).attr('date-id');
+            console.dir(id);
+           $.getJSON('/address/default?id='+id,function (data) {
+               console.dir(data);
+               //判断
+               if (data.status){
+                   self.location.href="/address/index";
+               }
+           })
+        });
     });
 
 
 
 
 
-    new PCAS("Address[province]","Address[city]","Address[area]");
+    new PCAS("Address[province]","Address[city]","Address[county]");
 
 
 </script>

@@ -26,7 +26,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','province','city','area','address','mobile'],'required'],
+            [['name','province','city','county','address','mobile'],'required'],
             [['status'],'safe'],
 //            [['mobile'], 'match','pattern'=>'/(13|14|15|17|18|19)[0-9]{9}/','message'=>'您输入电话格式有误！'],//电话规则
         ];
@@ -43,7 +43,7 @@ class Address extends \yii\db\ActiveRecord
             'name' => '收货人',
             'province' => '省',
             'city' => '市',
-            'area' => '区县',
+            'county' => '区县',
             'address' => '详细地址',
             'mobile' => '手机号码',
             'status' => '状态',

@@ -11,23 +11,11 @@
 </head>
 <body>
 <!-- 顶部导航 start -->
-<div class="topnav">
-    <div class="topnav_bd w990 bc">
-        <div class="topnav_left">
-
-        </div>
-        <div class="topnav_right fr">
-            <ul>
-                <li>您好，欢迎来到京西！[<a href="/user/login/">登录</a>] [<a href="/user/reg/">免费注册</a>] </li>
-                <li class="line">|</li>
-                <li>我的订单</li>
-                <li class="line">|</li>
-                <li>客户服务</li>
-
-            </ul>
-        </div>
-    </div>
-</div>
+<?php
+//顶部导航开始
+include Yii::getAlias('@app')."/views/common/nav.php";
+//顶部导航结束
+?>
 <!-- 顶部导航 end -->
 
 <div style="clear:both;"></div>
@@ -133,6 +121,16 @@
 <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/layer/layer.js"></script>
 <script type="text/javascript">
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
    $(function () {
        //提交数据
        $(".login_btn").click(function () {
@@ -140,7 +138,13 @@
                //console.dir(user);
                //判断
                if(user.status==1) {
-                   self.location.href="/index/index/";
+
+                   var url=getQueryVariable('url');
+                   if (url===false){
+                       self.location.href="/index/index/";
+                   }else {
+                       self.location.href=decodeURIComponent(url);
+                   }
                }
                if(user.status==-1){
                    //循环提示错误信息
