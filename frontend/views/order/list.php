@@ -53,7 +53,7 @@
                         break;
                 }
             ?>
-            </p>
+              </p>
 			<p class="message">完成支付后，你可以 <a href="">查看订单状态</a>  <a href="<?=\yii\helpers\Url::to(['index/index         '])?>">继续购物</a> <a href="">问题反馈</a></p>
 		</div>
 	</div>

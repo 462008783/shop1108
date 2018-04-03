@@ -183,13 +183,14 @@ class OrderController extends \yii\web\Controller
                     'status'=>1,
                     'msg'=>'订单提交成功',
                     'orderId'=>$order->id
+
 ,                ]);
             } catch(Exception $e) {
 
                 $transaction->rollBack();//事务回滚
 
                 return Json::encode([
-                    'status'=>1,
+                    'status'=>0,
                     'msg'=>$e ->getMessage(),
                 ]);
             }
@@ -210,6 +211,10 @@ class OrderController extends \yii\web\Controller
     }
 
 
+    /**
+     * 返回二维码
+     * @param $id
+     */
     public function actionWx($id)
     {
         //通过id找到对象

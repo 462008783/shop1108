@@ -255,10 +255,14 @@
 
             //点击提交订单
             $("#sub_btn").click(function () {
-                console.dir($("form").serialize());
+//                console.dir($("form").serialize());
                 $.post("/order/add",$("form").serialize(),function (data) {
-                    if (data.status) {
+//                    console.dir(data.orderId)
+                    if (data.status==1) {
                         self.location.href="/order/list?id="+data.orderId;
+                    }
+                    if(data.status==0){
+                        alert(data.msg)
                     }
                 },'json');
             });
