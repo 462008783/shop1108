@@ -43,6 +43,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['user_id', 'name', 'province', 'city', 'county', 'address', 'mobile', 'delivery_name', 'delivery_price', 'pay_id', 'pay_name', 'price', 'trade_no', 'order_status', 'created_at'], 'required'],
             [['user_id', 'delivery_id', 'pay_id', 'order_status', 'created_at'], 'integer'],
+            [['trade_no'],'unique'],
             [['delivery_price', 'price'], 'number'],
             [['name', 'province', 'city', 'county', 'address', 'delivery_name', 'pay_name', 'trade_no'], 'string', 'max' => 255],
             [['mobile'], 'string', 'max' => 20],

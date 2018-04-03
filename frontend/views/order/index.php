@@ -257,9 +257,8 @@
             $("#sub_btn").click(function () {
                 console.dir($("form").serialize());
                 $.post("/order/add",$("form").serialize(),function (data) {
-
                     if (data.status) {
-                        self.location.href="/order/list";
+                        self.location.href="/order/list?id="+data.orderId;
                     }
                 },'json');
             });
